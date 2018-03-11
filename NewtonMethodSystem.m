@@ -15,7 +15,9 @@ while true
                          
        if (norm(double(M(u,v)),inf) < tol)      % check error tolerance
            roots = round(X,sign_places);        % assign output
-           disp(['Roots: ', num2str(roots(1:end,end)'), '. Found within tolerance: ',...
+           disp('roots = ')
+           disp(roots(1:end,end))
+           disp(['Roots found by Newton (system) method within tolerance: ',...
                  num2str(tol), ' in ', num2str(i), ' iterations'])
            return
        else

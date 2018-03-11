@@ -4,8 +4,8 @@ clc
 clear all
 
 syms x;
-f = @(x) x^2 -x - 2;
-x_0 = 1;
+f = @(x) x^2 + x - 2;
+x_0 = 0.5;
 tol = 0.00001;
 
 tic;

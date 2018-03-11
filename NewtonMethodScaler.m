@@ -5,10 +5,11 @@ function [ root ] = NewtonMethodScaler(f, fprime, x_0, tol)
 
 % initial values
 x = x_0;
+root_found = false;
 
 sign_places = abs(log10(tol))+1;
 i=2;
-iteration_limit = 1000;
+iteration_limit = 10000;
 
 while true
     
@@ -20,15 +21,13 @@ while true
     
     % stopping criteria 
     if f(x(i)) == 0                                                % root found!
-        root = x;
-        disp(['Exact root: ', num2str(root(end)) ,...
-            '. Newton Found in ', num2str(i), ' iterations'])
-        return
-    end
-    
-    if abs( x(i) - x(i-1) ) / abs(x(i)) < tol
+        root_found = true;
+    elseif abs(x(i))==0
+        error('Division by zero (cannot test stopping criteria)')
+    elseif (abs( x(i) - x(i-1) ) / abs( x(i) ) < tol) || root_found
         root = round(x,sign_places);
-        disp(['Root: ',num2str(root(end)), '. Newton found within tolerance: ',...
+        disp(['Root = ',num2str(root(end)),...
+            ' found by Newton method within tolerance: ',...
             num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end

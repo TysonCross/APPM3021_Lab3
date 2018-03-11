@@ -9,6 +9,7 @@ function [ root ] = bisectionSearch( f, tol, I_0 )
 a = I_0(1);
 b = I_0(2);
 c = [ b-a ];
+root_found = false;
     
 if f(a)*f(b) > 0                                                % must have opposite signs
     error(['No root can be found within the interval [',...
@@ -24,16 +25,14 @@ for i = 2:max_iterations
 
     % stopping criteria
     if f(c(i)) == 0                                            	% root found!
-        root = c;
-        disp(['Exact root: ', num2str(root(i)) ,'. Bisection found in ', num2str(i), ' iterations'])
-        return
-    end
-
-    if c(i)==0
+        root_found = true;
+    elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
-    elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol)
+    elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol) || root_found
         root = round(c,sign_places);
-        disp(['Root: ',num2str(root(i)), '. Bisection found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
+        disp(['Root = ',num2str(root(end)),...
+            ' found by bisection method within tolerance: ',...
+            num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
     

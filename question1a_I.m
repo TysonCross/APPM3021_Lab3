@@ -1,4 +1,4 @@
-% APPM3021 Lab 3, Question 1 a)
+% APPM3021 Lab 3, Question 1 (a) (I)
 
 clc
 clear all
