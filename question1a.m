@@ -1,10 +1,10 @@
-% APPM3021 Lab 3, Exercise 4
+% APPM3021 Lab 3, Question 1 a)
 
 clc
 clear all
 
 syms x;
-f = @(x)  2*x^3 - 7*x + 2;
+f = @(x) exp(x) + 2^(-x) + 2*cos(x) - 6;
 fprime = matlabFunction( diff(f(x)) );
 x_0 = 2;
 I_0 = [1, 2];
@@ -20,9 +20,9 @@ root_newton = NewtonMethodScaler(f, fprime, x_0, tol);
 t_newton = toc;
 
 % iterations
-iter_bisec = length (root_bisec);
-iter_falsi = length (root_falsi);
-iter_newton = length (root_newton);
+iter_bisec = length(root_bisec);
+iter_falsi = length(root_falsi);
+iter_newton = length(root_newton);
 
 % relative error
 error_bisec(1) = I_0(2)-I_0(1);
@@ -42,7 +42,12 @@ for index=2:iter_newton
     error_newton(index) = max(difference)/max(abs(root_newton(:,index)));
 end
 
+% if error_newton(iter_newton) == 0
+%     error_newton(iter_newton) = tol
+% end
+
 % time
+disp(' ')
 disp(['Bisection root converged in ', num2str(t_bisec*1000), ' milli-seconds'])
 disp(['Regula Falsi root converged in ', num2str(t_falsi*1000), ' milli-seconds'])
 disp(['Newton fixed-point root converged in ', num2str(t_newton*1000), ' milli-seconds'])

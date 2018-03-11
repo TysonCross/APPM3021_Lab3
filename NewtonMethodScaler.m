@@ -7,19 +7,19 @@ function [ root ] = NewtonMethodScaler(f, fprime, x_0, tol)
 x = x_0;
 
 sign_places = abs(log10(tol))+1;
-i=1;
+i=2;
 iteration_limit = 1000;
 
 while true
     
-    if fprime(x(i))==0
+    if fprime(x(i-1))==0
         error('Division by zero, fprime = 0')
     else
-        x(i+1) =  x(i) - ( f(x(i) ) / fprime(x(i)) );
+        x(i) =  x(i-1) - ( f(x(i-1) ) / fprime(x(i-1)) );
     end
     
     % stopping criteria 
-    if abs( x(i+1)-x(i) ) / abs(x(i+1)) < tol
+    if abs( x(i)-x(i-1) ) / abs(x(i)) < tol
         root = round(x(2:i),sign_places);
         disp(['Root: ',num2str(root(end)), '. Found within tolerance: ',...
             num2str(tol), ' in ', num2str(i-1), ' iterations'])
