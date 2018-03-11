@@ -10,7 +10,7 @@ a = I_0(1);
 b = I_0(2);
 c = [ b-a ];
 
-if f(a)*f(b) > 0                                                % must have opposite signs
+if f(a)*f(b) > 0                                                   % must have opposite signs
     error(['No root can be found within the interval [',...
         num2str(a),',', num2str(b),'] with the equation ',func2str(f)])
 end
@@ -32,17 +32,19 @@ while true
         error('Division by zero (cannot test stopping criteria)')
     elseif abs(c(i)-c(i-1)) / abs(c(i)) < tol
         root = round(c,sign_places);
-        disp(['Root: ',num2str(root(i)), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
+        disp(['Root: ',num2str(root(i)), '. Found within tolerance: ',...
+            num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
     
     if f(c(i)) == 0                                                % root found!
         root = c;
-        disp(['Exact root: ', num2str(root(i)) ,'. Found in ', num2str(i), ' iterations'])
+        disp(['Exact root: ', num2str(root(i)) ,'. Found in ',...
+            num2str(i), ' iterations'])
         return
     elseif f(c(i)) > 0
         b = c(i);
-    else                                                        % f(c(i)) > 0
+    else                                                           % f(c(i)) > 0
         a = c(i);
     end
     i=i+1;

@@ -2,12 +2,11 @@
 
 clc
 clear all
-format long
 
 syms x;
 f = @(x) x^2 -x - 2;
 fprime = matlabFunction( diff(f(x)) );
-x_0 = 0;
+x_0 = 1;
 tol = 0.00001;
 
 tic;

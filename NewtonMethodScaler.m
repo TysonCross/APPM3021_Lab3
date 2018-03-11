@@ -8,6 +8,7 @@ x = x_0;
 
 sign_places = abs(log10(tol))+1;
 i=1;
+iteration_limit = 1000;
 
 while true
     
@@ -20,17 +21,24 @@ while true
     % stopping criteria 
     if abs( x(i+1)-x(i) ) / abs(x(i+1)) < tol
         root = round(x(2:i),sign_places);
-        disp(['Root: ',num2str(root(end)), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i-1), ' iterations'])
+        disp(['Root: ',num2str(root(end)), '. Found within tolerance: ',...
+            num2str(tol), ' in ', num2str(i-1), ' iterations'])
         return
     end
     
     if f(x(i)) == 0                                                % root found!
         root = x(2:i);
-        disp(['Exact root: ', num2str(root(end)) ,'. Found in ', num2str(i-1), ' iterations'])
+        disp(['Exact root: ', num2str(root(end)) ,...
+            '. Found in ', num2str(i-1), ' iterations'])
         return
     end
 
-    i=i+1;
+    if i>iteration_limit
+        error(['Unable to find root within ', num2str(iteration_limit),...
+            ' iterations'])
+    else
+        i=i+1;
+    end
 end
 end
 

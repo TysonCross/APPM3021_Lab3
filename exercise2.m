@@ -2,7 +2,6 @@
 
 clc
 clear all
-format long
 
 equation = @(x) x^2 -x - 2;
 I_0 = [1, 4];
