@@ -22,20 +22,23 @@ for i = 2:max_iterations
 
     c(i) = (a+b)/2;
 
-    % stopping criteria 
+    % stopping criteria
+    if f(c(i)) == 0                                            	% root found!
+        root = c;
+        disp(['Exact root: ', num2str(root(i)) ,'. Bisection found in ', num2str(i), ' iterations'])
+        return
+    end
+
     if c(i)==0
         error('Division by zero (cannot test stopping criteria)')
     elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol)
         root = round(c,sign_places);
-        disp(['Root: ',num2str(root(i)), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
+        disp(['Root: ',num2str(root(i)), '. Bisection found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
     
-    if f(c(i)) == 0                                            	% root found!
-        root = c;
-        disp(['Exact root: ', num2str(root(i)) ,'. Found in ', num2str(i), ' iterations'])
-        return
-    elseif f(a)*f(c(i)) < 0
+    % prepare for next loop
+    if f(a)*f(c(i)) < 0
         b = c(i);
     else                                                        % f(a)*f(c(i)) > 0, i.e. same signs
         a = c(i);

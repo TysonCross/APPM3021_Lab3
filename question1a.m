@@ -4,7 +4,7 @@ clc
 clear all
 
 syms x;
-f = @(x) exp(x) + 2^(-x) + 2*cos(x) - 6;
+f = @(x) exp(x) + 2^(-x) + 2*cos(x) - 6
 x_0 = 2;
 I_0 = [1, 2];
 tol = 0.00001;
