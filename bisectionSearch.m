@@ -17,7 +17,6 @@ end
 
 sign_places = abs(log10(tol))+1;
 max_iterations = ceil(log2(2*(b-a)/tol))-1;
-% disp(['Total iterations should not exceeed ', num2str(max_iterations)])
 
 for i = 2:max_iterations
 
@@ -28,7 +27,7 @@ for i = 2:max_iterations
         error('Division by zero (cannot test stopping criteria)')
     elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol)
         root = round(c,sign_places);
-        disp(['Root: ',num2str(root(i),sign_places), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
+        disp(['Root: ',num2str(root(i)), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
     

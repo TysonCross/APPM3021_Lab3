@@ -16,10 +16,9 @@ if f(a)*f(b) > 0                                                % must have oppo
 end
 
 sign_places = abs(log10(tol))+1;
-max_iterations = ceil(log2(2*(b-a)/tol))-1;
-% disp(['Total iterations should not exceeed ', num2str(max_iterations)])
+i=2;
 
-for i = 2:max_iterations
+while true
 
     if f(b)==f(a)
         error(['Interval is zero between [',...
@@ -31,9 +30,9 @@ for i = 2:max_iterations
     % stopping criteria 
     if c(i)==0
         error('Division by zero (cannot test stopping criteria)')
-    elseif abs(c(i)-c(i-1)) < tol
+    elseif abs(c(i)-c(i-1)) / abs(c(i)) < tol
         root = round(c,sign_places);
-        disp(['Root: ',num2str(root(i),sign_places), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
+        disp(['Root: ',num2str(root(i)), '. Found within tolerance: ', num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
     
@@ -46,6 +45,6 @@ for i = 2:max_iterations
     else                                                        % f(c(i)) > 0
         a = c(i);
     end
+    i=i+1;
 end
 end
-
