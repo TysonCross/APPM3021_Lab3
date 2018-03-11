@@ -5,7 +5,6 @@ clear all
 
 syms x;
 f = @(x) exp(x) + 2^(-x) + 2*cos(x) - 6;
-fprime = matlabFunction( diff(f(x)) );
 x_0 = 2;
 I_0 = [1, 2];
 tol = 0.00001;
@@ -16,6 +15,7 @@ root_bisec = bisectionSearch(f, tol, I_0);
 t_bisec = toc; tic;
 root_falsi = regulaFalsiSearch(f, tol, I_0);
 t_falsi = toc; tic;
+fprime = matlabFunction( diff(f(x)) );                      % included in Newton timing 
 root_newton = NewtonMethodScaler(f, fprime, x_0, tol);
 t_newton = toc;
 
@@ -41,10 +41,6 @@ for index=2:iter_newton
     difference = abs(root_newton(:,index) - root_newton(:,index-1));
     error_newton(index) = max(difference)/max(abs(root_newton(:,index)));
 end
-
-% if error_newton(iter_newton) == 0
-%     error_newton(iter_newton) = tol
-% end
 
 % time
 disp(' ')

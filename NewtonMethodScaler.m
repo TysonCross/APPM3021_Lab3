@@ -19,20 +19,27 @@ while true
     end
     
     % stopping criteria 
-    if abs( x(i)-x(i-1) ) / abs(x(i)) < tol
-        root = round(x(2:i),sign_places);
-        disp(['Root: ',num2str(root(end)), '. Found within tolerance: ',...
-            num2str(tol), ' in ', num2str(i-1), ' iterations'])
+    if f(x(i)) == 0                                                % root found!
+        root = x;
+%         if root(end)==root(end-1)
+%             root(end)=[];
+%         end
+        disp(['Exact root: ', num2str(root(end)) ,...
+            '. Found in ', num2str(i), ' iterations'])
         return
     end
     
-    if f(x(i)) == 0                                                % root found!
-        root = x(2:i);
-        disp(['Exact root: ', num2str(root(end)) ,...
-            '. Found in ', num2str(i-1), ' iterations'])
+    if abs( x(i) - x(i-1) ) / abs(x(i)) < tol
+        root = round(x,sign_places);
+%         if root(end)==root(end-1)
+%             root(end)=[];
+%             i = i - 1;
+%         end
+        disp(['Root: ',num2str(root(end)), '. Found within tolerance: ',...
+            num2str(tol), ' in ', num2str(i), ' iterations'])
         return
     end
-
+    
     if i>iteration_limit
         error(['Unable to find root within ', num2str(iteration_limit),...
             ' iterations'])

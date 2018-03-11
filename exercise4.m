@@ -5,7 +5,6 @@ clear all
 
 syms x;
 f = @(x)  2*x^3 - 7*x + 2;
-fprime = matlabFunction( diff(f(x)) );
 x_0 = 2;
 I_0 = [1, 2];
 tol = 0.00001;
@@ -16,13 +15,14 @@ root_bisec = bisectionSearch(f, tol, I_0);
 t_bisec = toc; tic;
 root_falsi = regulaFalsiSearch(f, tol, I_0);
 t_falsi = toc; tic;
+fprime = matlabFunction( diff(f(x)) );                      % included in timing 
 root_newton = NewtonMethodScaler(f, fprime, x_0, tol);
 t_newton = toc;
 
 % iterations
-iter_bisec = length (root_bisec);
-iter_falsi = length (root_falsi);
-iter_newton = length (root_newton);
+iter_bisec = length(root_bisec);
+iter_falsi = length(root_falsi);
+iter_newton = length(root_newton);
 
 % relative error
 error_bisec(1) = I_0(2)-I_0(1);
@@ -43,9 +43,10 @@ for index=2:iter_newton
 end
 
 % time
-disp(['Bisection root converged in ', num2str(t_bisec*1000), ' milli-seconds'])
-disp(['Regula Falsi root converged in ', num2str(t_falsi*1000), ' milli-seconds'])
-disp(['Newton fixed-point root converged in ', num2str(t_newton*1000), ' milli-seconds'])
+disp(' ')
+disp(['Bisection root found in ', num2str(t_bisec*1000), ' milli-seconds'])
+disp(['Regula Falsi root found in ', num2str(t_falsi*1000), ' milli-seconds'])
+disp(['Newton fixed-point root found in ', num2str(t_newton*1000), ' milli-seconds'])
 
 
 %% Display setting and output setup
@@ -108,7 +109,8 @@ set(ax1,'FontSize',14,...
     'YMinorTick','on');hold on
 
 % Legend
-legend1 = legend({'Bisection','Regula Falsi','Newton Fixed Point', 'Error Threshold'},...
+legend1 = legend({'Bisection','Regula Falsi',...
+     'Newton Fixed Point', 'Error Threshold'},...
      'Position',[0.7    0.7    0.2    0.09],...
      'Box','off');
 hold off

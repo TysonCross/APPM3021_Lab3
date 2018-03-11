@@ -27,7 +27,13 @@ while true
         c(i) = ( a*f(b) - b*f(a) ) / ( f(b) - f(a) );
     end
     
-    % stopping criteria 
+    % stopping criteria
+    if f(c(i)) == 0                                                % root found!
+        root = c;
+        disp(['Exact root: ', num2str(root(i)) ,'. Found in ',...
+            num2str(i), ' iterations'])
+        return
+    end
     if c(i)==0
         error('Division by zero (cannot test stopping criteria)')
     elseif abs(c(i)-c(i-1)) / abs(c(i)) < tol
@@ -37,12 +43,7 @@ while true
         return
     end
     
-    if f(c(i)) == 0                                                % root found!
-        root = c;
-        disp(['Exact root: ', num2str(root(i)) ,'. Found in ',...
-            num2str(i), ' iterations'])
-        return
-    elseif f(c(i)) > 0
+    if f(c(i)) > 0
         b = c(i);
     else                                                           % f(c(i)) > 0
         a = c(i);
