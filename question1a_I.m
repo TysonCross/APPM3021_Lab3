@@ -11,12 +11,12 @@ tol = 0.00001;
 
 % measurements
 tic;
-root_bisec = bisectionSearch(f, tol, I_0);
+root_bisec = bisectionSearch(f, tol, I_0,true);
 t_bisec = toc; tic;
-root_falsi = regulaFalsiSearch(f, tol, I_0);
+root_falsi = regulaFalsiSearch(f, tol, I_0,true);
 t_falsi = toc; tic;
 fprime = matlabFunction( diff(f(x)) );                      % included in Newton timing 
-root_newton = NewtonMethodScaler(f, fprime, x_0, tol);
+root_newton = NewtonMethodScaler(f, fprime, x_0, tol,true);
 t_newton = toc;
 
 % iterations
@@ -100,10 +100,11 @@ ylabel('Relative Error',...
 xlabel('Number of Iterations',...
     'FontName',fontName,...
     'FontSize',14);
-max_x = max(iter_bisec(1,1),iter_falsi(1,1));
-xlim(ax1,[1 max_x]);
+max_x = max(iter_bisec(1,1),iter_falsi(1,1))+1;
+% ax1.XLim = [1 max_x];
 box(ax1,'off');
 set(ax1,'FontSize',14,...
+    'XLim',[1 max_x],...
     'XTick',[0:1:max_x],...
     'XTickLabelRotation',45,...
     'YMinorTick','on');hold on
