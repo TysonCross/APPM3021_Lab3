@@ -1,9 +1,13 @@
-function [ root ] = bisectionSearch( f, tol, I_0 )
+function [ root ] = bisectionSearch( f, tol, I_0, keep_iterations )
 % bisectionSearch returns the root of an equation f, within tolerance tol
 % with initial bracket I_0 = [a_initial, b_initial]
 % The method is based on continual bisection of the interval
 % containing the root (by evaluating the sign of of the input
 % equation over the two halves of the current interval)
+
+if nargin<4
+    keep_iterations = false;
+end
 
 % initial values
 a = I_0(1);
@@ -29,7 +33,11 @@ for i = 2:max_iterations
     elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
     elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol) || root_found
-        root = round(c,sign_places);
+        if keep_iterations
+            root = round(c,sign_places);
+        else
+            root = round(c(end),sign_places);
+        end
         disp(['Root = ',num2str(root(end)),...
             ' found by bisection method within tolerance: ',...
             num2str(tol), ' in ', num2str(i), ' iterations'])

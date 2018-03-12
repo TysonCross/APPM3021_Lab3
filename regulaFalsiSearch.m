@@ -1,8 +1,12 @@
-function [ root ] = regulaFalsiSearch(f, tol, I_0)
+function [ root ] = regulaFalsiSearch(f, tol, I_0, keep_iterations)
 % regulaFalsiSearch returns the root of an equation f, within tolerance tol
 % with initial bracket I_0 = [a_initial, b_initial]
 % regular falsi does a linear interpolation between two points,
 % finding the x-intercept and using this intercept for the new interval
+
+if nargin<4
+    keep_iterations = false;
+end
 
 
 % initial values
@@ -34,7 +38,11 @@ while true
     elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
     elseif abs(c(i)-c(i-1)) / abs(c(i)) < tol || root_found
-        root = round(c,sign_places);
+        if keep_iterations
+            root = round(c,sign_places);
+        else
+            root = round(c(end),sign_places);
+        end
         disp(['Root = ',num2str(root(end)),...
             ' found by Regula-Falsi method within tolerance: ',...
             num2str(tol), ' in ', num2str(i), ' iterations'])

@@ -5,7 +5,7 @@ clear all
 
 syms x y;
 f = @(x) tan(x) - x;
-x_0 = [1.5, pi/2, 4.6, 3*pi/2, 4.71, 5*pi/2, 7.6, 7.85]; % guesses based on visual intercepts
+x_0 = [0, 0,1, 1.5, pi/2, 4.6, 3*pi/2, 4.71, 5*pi/2, 7.6, 7.85]; % guesses based on visual intercepts
 % x_0 = [1:0.001:10];
 tol = 0.0001;
 root_newton = [];
@@ -14,9 +14,10 @@ root_newton = [];
 fprime = matlabFunction( diff(f(x)) );
 for i=1:length(x_0)
     root = NewtonMethodScaler(f, fprime, x_0(i), tol);
-    if isempty(root) || isnan(root(end)) || isinf(root(end))
-    elseif ~ismember(root(end), root_newton(:))
-        root_newton(i) = root(end);
+    if isempty(root) || isnan(root) || isinf(root)
+    elseif (root > 10) || (root < 0)
+    else
+        root_newton(i) = root;
     end
 end
 root_newton= sort(unique(root_newton));

@@ -11,12 +11,12 @@ tol = 0.00001;
 
 % measurements
 tic;
-root_bisec = bisectionSearch(f, tol, I_0);
+root_bisec = bisectionSearch(f, tol, I_0, true);
 t_bisec = toc; tic;
-root_falsi = regulaFalsiSearch(f, tol, I_0);
+root_falsi = regulaFalsiSearch(f, tol, I_0, true);
 t_falsi = toc; tic;
 fprime = matlabFunction( diff(f(x)) );                      % included in timing 
-root_newton = NewtonMethodScaler(f, fprime, x_0, tol);
+root_newton = NewtonMethodScaler(f, fprime, x_0, tol, true);
 t_newton = toc;
 
 % iterations
