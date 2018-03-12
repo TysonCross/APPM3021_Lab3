@@ -31,11 +31,7 @@ scr = get(groot,'ScreenSize');                              % screen resolution
 fig1 =  figure('Position',...                               % draw figure
     [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title
-    'name','Comparison of iterative root-finding methods',...
     'Color','white');
-% set(fig1, 'MenuBar', 'none');                               % Make figure clean
-% set(fig1, 'ToolBar', 'none');                             
-% fontName='CMU Serif';
 fontName='Helvetica';
 set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
@@ -57,7 +53,6 @@ p2 = plot(values,a,...
         'LineStyle','-',...
         'LineWidth',1);
 hold on
-
 
 r1 = refline(1,0);
 set(r1,'Color',[0.18 0.18 0.9 .6],...                 
