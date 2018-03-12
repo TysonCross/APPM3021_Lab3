@@ -24,20 +24,21 @@ sign_places = abs(log10(tol))+1;
 i=2;
 
 while true
-
     if f(b)==f(a)
         error(['Interval is zero between [',...
         num2str(a),',', num2str(b),']'])
-    else
-        c(i) = ( a*f(b) - b*f(a) ) / ( f(b) - f(a) );
     end
     
+    c(i) = ( a*f(b) - b*f(a) ) / ( f(b) - f(a) );
+    
     % stopping criteria
-    if f(c(i)) == 0                                                % root found!
+    if round(f(c(i)),sign_places) == 0                                                % root found!
         root_found = true;
     elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
-    elseif abs(c(i)-c(i-1)) / abs(c(i)) < tol || root_found
+    end
+    
+    if abs(c(i)-c(i-1)) / abs(c(i)) < tol || root_found
         if keep_iterations
             root = round(c,sign_places);
         else
@@ -49,12 +50,11 @@ while true
         return
     end
     
-    
+    % prepare for next loop
     if f(c(i)) > 0
         b = c(i);
     else                                                           % f(c(i)) > 0
         a = c(i);
     end
-    i=i+1;
 end
 end

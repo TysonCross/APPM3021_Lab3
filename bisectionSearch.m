@@ -24,7 +24,12 @@ sign_places = abs(log10(tol))+1;
 max_iterations = ceil(log2(2*(b-a)/tol))-1;
 
 for i = 2:max_iterations
-
+    
+    if f(b)==f(a)
+        error(['Interval is zero between [',...
+        num2str(a),',', num2str(b),']'])
+    end
+    
     c(i) = (a+b)/2;
 
     % stopping criteria
@@ -32,7 +37,9 @@ for i = 2:max_iterations
         root_found = true;
     elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
-    elseif (abs(c(i)-c(i-1)) / abs(c(i)) < tol) || root_found
+    end
+    
+    if (abs(c(i)-c(i-1)) / abs(c(i)) < tol) || root_found
         if keep_iterations
             root = round(c,sign_places);
         else
@@ -51,4 +58,6 @@ for i = 2:max_iterations
         a = c(i);
     end
 end
+disp('Operation failed')
+root = [];
 end

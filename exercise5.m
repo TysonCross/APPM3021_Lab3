@@ -1,7 +1,7 @@
 % APPM3021 Lab 3, Exercise 5
 
 clc
-clear all
+clear global variable
 
 % system of equations
 syms f g x y;

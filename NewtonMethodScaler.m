@@ -13,7 +13,7 @@ root_found = false;
 
 sign_places = abs(log10(tol))+1;
 i=2;
-iteration_limit = 1000;
+iteration_limit = 10^sign_places;
 
 while true
     
@@ -28,7 +28,9 @@ while true
         root_found = true;
     elseif abs(x(i))==0
         error('Division by zero (cannot test stopping criteria)')
-    elseif (abs( x(i) - x(i-1) ) / abs( x(i) ) < tol) || root_found
+    end
+    
+    if (abs( x(i) - x(i-1) ) / abs( x(i) ) < tol) || root_found
         if keep_iterations
             root = round(x,sign_places);
         else

@@ -1,7 +1,7 @@
 % APPM3021 Lab 3, Exercise 4
 
 clc
-clear all
+clear global variable
 
 syms x;
 f = @(x)  2*x^3 - 7*x + 2;

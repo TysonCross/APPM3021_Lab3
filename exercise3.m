@@ -1,7 +1,7 @@
 % APPM3021 Lab 3, Exercise 3
 
 clc
-clear all
+clear global variable
 
 syms x;
 f = @(x) x^2 + x - 2;

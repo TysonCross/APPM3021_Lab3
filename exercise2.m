@@ -1,7 +1,7 @@
 % APPM3021 Lab 3, Exercise 2
 
 clc
-clear all
+clear global variable
 
 equation = @(x) x^2 -x - 2;
 I_0 = [1, 4];
