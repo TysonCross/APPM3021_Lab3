@@ -9,15 +9,15 @@ root_found = false;
 
 sign_places = abs(log10(tol))+1;
 i=2;
-iteration_limit = 10000;
+iteration_limit = 1000;
 
 while true
     
-    if fprime(x(i-1))==0
-        error('Division by zero, fprime = 0')
-    else
+%     if fprime(x(i-1))==0
+%         error('Division by zero, fprime = 0')
+%     else
         x(i) =  x(i-1) - ( f(x(i-1) ) / fprime(x(i-1)) );
-    end
+%     end
     
     % stopping criteria 
     if f(x(i)) == 0                                                % root found!
@@ -25,7 +25,7 @@ while true
     elseif abs(x(i))==0
         error('Division by zero (cannot test stopping criteria)')
     elseif (abs( x(i) - x(i-1) ) / abs( x(i) ) < tol) || root_found
-        root = round(x,sign_places);
+        root = round(x(end),sign_places);
         disp(['Root = ',num2str(root(end)),...
             ' found by Newton method within tolerance: ',...
             num2str(tol), ' in ', num2str(i), ' iterations'])
@@ -33,8 +33,10 @@ while true
     end
     
     if i>iteration_limit
-        error(['Unable to find root within ', num2str(iteration_limit),...
-            ' iterations'])
+        disp(['Unable to find root (within ', num2str(iteration_limit),...
+            ' iterations)'])
+        root = [];
+        return
     else
         i=i+1;
     end
