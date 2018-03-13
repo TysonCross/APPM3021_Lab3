@@ -23,7 +23,7 @@ end
 sign_places = abs(log10(tol))+1;
 max_iterations = ceil(log2(2*(b-a)/tol))-1;
 
-for i = 2:max_iterations
+for i = 2:max_iterations+1
     
     if f(b)==f(a)
         error(['Interval is zero between [',...

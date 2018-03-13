@@ -32,7 +32,7 @@ while true
     c(i) = ( a*f(b) - b*f(a) ) / ( f(b) - f(a) );
     
     % stopping criteria
-    if round(f(c(i)),sign_places) == 0                                                % root found!
+    if round(f(c(i)),sign_places+1) == 0                                                % root found!
         root_found = true;
     elseif c(i)==0
         error('Division by zero (cannot test stopping criteria)')
@@ -56,5 +56,6 @@ while true
     else                                                           % f(c(i)) > 0
         a = c(i);
     end
+    i=i+1;
 end
 end

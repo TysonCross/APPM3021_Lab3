@@ -3,13 +3,16 @@
 clc
 clear global variable
 
-syms x;
-f = @(x)  2*x^3 - 7*x + 2;
-x_0 = 2;
+syms f x;
+f = @(x) 2*x^3 - -x^2 - exp(x) - 2.2;
+
+warning('off');
+
+x_0 = 1;
 I_0 = [1, 2];
 tol = 0.00001;
 
-% measurements
+% measurements and timing
 tic;
 root_bisec = bisectionSearch(f, tol, I_0, true);
 t_bisec = toc; tic;
@@ -46,11 +49,37 @@ end
 disp(' ')
 disp(['Bisection root found in ', num2str(t_bisec*1000), ' milli-seconds'])
 disp(['Regula Falsi root found in ', num2str(t_falsi*1000), ' milli-seconds'])
-disp(['Newton fixed-point root found in ', num2str(t_newton*1000), ' milli-seconds'])
+disp(['Newton fixed-point root found in ', num2str(t_newton*1000), ' milli-seconds (including calculation of f'')'])
 
-
-%% Display setting and output setup
+%% Plotting
+% Quick function plot
 scr = get(groot,'ScreenSize');                              % screen resolution
+figez =  figure('Position',...                               % draw figure
+    [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
+set(figez,'numbertitle','off',...
+    'Color','white');
+set(figez, 'MenuBar', 'none');                               % Make figure clean
+set(figez, 'ToolBar', 'none');
+fontName='Helvetica';
+set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
+set(0,'defaultTextFontName', fontName);
+set(groot,'FixedWidthFontName', 'ElroNet Monospace')   
+ezplot(f,[-5,7,-100,150],figez)
+r_ez = refline(0,0);
+r_ez.Color = [0.18 0.18 0.18];
+set(gca,'Box','off')
+title(char(sym(f)),...
+    'FontSize',14,...
+    'FontName',fontName);
+ylabel('f(x) \rightarrow',...
+    'FontName',fontName,...
+    'FontSize',14);%,...
+xlabel('x \rightarrow',...
+    'FontName',fontName,...
+    'FontSize',14);
+
+%% Main plot
+% Display setting and output setup
 fig1 =  figure('Position',...                               % draw figure
     [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title
@@ -58,13 +87,12 @@ set(fig1,'numbertitle','off',...                            % Give figure useful
     'Color','white');
 set(fig1, 'MenuBar', 'none');                               % Make figure clean
 set(fig1, 'ToolBar', 'none');                             
-% fontName='CMU Serif';
 fontName='Helvetica';
 set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
 set(groot,'FixedWidthFontName', 'ElroNet Monospace')      
 
-%% Plot
+% Plot
 p1 = plot(error_bisec,...
         'Color',[0.18 0.18 0.9 .6],...                 
         'LineStyle','-',...
@@ -87,13 +115,25 @@ set(p4,'Color',[0.18 0.18 0.18 .6],...
 hold on
 
 % Title
-title('Relative Error vs. Iterations',...
+title('Error vs. Iterations',...
     'FontSize',14,...
     'FontName',fontName);
 
+% Annotations
+    info_pos =   [0.74 0.3 0.5 0.2];
+    str_info = {'Iterations to find root',...
+            [' Bisection:           ', num2str(iter_bisec)],...
+            [' Regula Falsi:      ', num2str(iter_falsi)],...
+            [' Newton:              ', num2str(iter_newton)]};
+    info = annotation('textbox',info_pos,...
+        'String', str_info,...
+        'FitBoxToText','on',...
+        'LineStyle','-',...
+        'FontName',fontName,...
+        'FontSize',15);
+
 % Axes and labels
 ax1 = gca;
-% hold(ax1,'on');
 ylabel('Relative Error',...
     'FontName',fontName,...
     'FontSize',14);%,...
@@ -112,6 +152,8 @@ set(ax1,'FontSize',14,...
 legend1 = legend({'Bisection','Regula Falsi',...
      'Newton Fixed Point', 'Error Threshold'},...
      'Position',[0.7    0.7    0.2    0.09],...
-     'Box','off');
+     'Box','off',...
+     'FontName',fontName,...
+     'FontSize',13);
 hold off
 % epswrite('images/relative_error.eps');

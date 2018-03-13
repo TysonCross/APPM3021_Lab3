@@ -17,5 +17,5 @@ tol = 0.00001;
 tic;
 it_root_newton_sys = NewtonMethodSystem(F, J, X_0, tol);
 t_newton_sys = toc;
-disp(['Solution converged in ', num2str(t_newton_sys*1000), ' milli-seconds'])
+disp(['Solution converged in ', num2str(t_newton_sys*1000), ' milli-seconds (including calculation of f'')'])
 
