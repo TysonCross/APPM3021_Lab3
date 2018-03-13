@@ -1,7 +1,6 @@
 % APPM3021 Lab 3, Question 2 (a)
 
-clc
-clear all
+clc; clear all;
 
 % system of equations
 syms f g h u v w;

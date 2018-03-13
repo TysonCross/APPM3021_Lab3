@@ -1,7 +1,6 @@
 % APPM3021 Lab 3, Question 1 (a) (I)
 
-clc
-clear all
+clc; clear all;
 
 syms x;
 f = @(x) exp(x) + 2^(-x) + 2*cos(x) - 6
@@ -50,9 +49,12 @@ disp(['Newton fixed-point root converged in ', num2str(t_newton*1000), ' milli-s
 
 %% Main plot
 % Display setting and output setup
-scr = get(groot,'ScreenSize');                              % screen resolution 
+scr = get(groot,'ScreenSize');                              % screen resolution
+phi = (1 + sqrt(5))/2;
+ratio = phi/3;
+offset = [ scr(3)/4 scr(4)/4]; 
 fig1 =  figure('Position',...                               % draw figure
-    [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
+        [offset(1) offset(2) scr(3)*ratio scr(4)*ratio*0.9]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title
     'name','Comparison of iterative root-finding methods',...
     'Color','white');
@@ -92,7 +94,7 @@ title('Error vs. Iterations',...
     'FontName',fontName);
 
 % Annotations
-    info_pos =   [0.74 0.3 0.5 0.2];
+    info_pos =   [0.71 0.18 0.5 0.2];
     str_info = {'Iterations to find root',...
             [' Bisection:           ', num2str(iter_bisec)],...
             [' Regula Falsi:      ', num2str(iter_falsi)],...
@@ -106,7 +108,6 @@ title('Error vs. Iterations',...
     
 % Axes and labels
 ax1 = gca;
-% hold(ax1,'on');
 ylabel('Relative Error',...
     'FontName',fontName,...
     'FontSize',14);%,...
@@ -114,13 +115,13 @@ xlabel('Number of Iterations',...
     'FontName',fontName,...
     'FontSize',14);
 max_x = max(iter_bisec(1,1),iter_falsi(1,1))+1;
-% ax1.XLim = [1 max_x];
 box(ax1,'off');
 set(ax1,'FontSize',14,...
     'XLim',[1 max_x],...
     'XTick',[0:1:max_x],...
     'XTickLabelRotation',45,...
-    'YMinorTick','on');hold on
+    'YMinorTick','on');
+hold on
 
 % Legend
 legend1 = legend({'Bisection','Regula Falsi','Newton Fixed Point', 'Error Threshold'},...
@@ -128,5 +129,26 @@ legend1 = legend({'Bisection','Regula Falsi','Newton Fixed Point', 'Error Thresh
      'Box','off',...
      'FontName',fontName,...
      'FontSize',13);
+
+ % Mini-plot of function
+pos = ax1.Position;
+ax2 = axes('Position', [pos(3)-pos(1)/2 pos(4)-pos(4)/2.3 pos(3)/5 pos(4)/5]);
+ezplot(ax2, f, [-8,6,-10,20]);
+% r1 = refline(0,0);
+% r1.Color = 'black';
+set(ax2,'FontSize',9,...
+    'XAxisLocation','origin',...
+    'YAxisLocation','origin',...
+    'Box','on',...
+    'Layer','top',...
+    'Color','none');
+ylabel(ax2,'');
+xlabel(ax2,'');
+hold on
+
+% Adjust figure
+pos = get(ax1, 'Position');
+pos(1) = 0.05;
+pos(3) = pos(3)*1.2;
+set(ax1, 'Position', pos)
 hold off
-% epswrite('images/relative_error.eps');

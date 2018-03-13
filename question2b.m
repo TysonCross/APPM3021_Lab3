@@ -1,7 +1,6 @@
 % APPM3021 Lab 3, Question 2 (b)
 
-clc
-clear all
+clc; clear all;
 
 % system of equations
 syms f g x y;
@@ -17,6 +16,6 @@ for i=1:length(X_0)
     root = NewtonMethodSystem(F, J, X_0(i,:), tol);
     if isempty(root(:)) || isnan(sum(root)) || isinf(sum(root(:)))
     else
-        root_newton(:,i) = [root(1),root(2)]';
+        roots_newton(i,:) = [root(1) root(2)];
     end
 end

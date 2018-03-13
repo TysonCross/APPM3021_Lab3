@@ -1,7 +1,6 @@
 % APPM3021 Lab 3, Question 1 (a) (II)
 
-clc
-clear global variable
+clc; clear all;
 
 syms f x;
 f = @(x) 1 - 2/(x^2 - 2*x + 2)

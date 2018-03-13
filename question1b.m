@@ -1,7 +1,6 @@
 % APPM3021 Lab 3, Question 1 (b)
 
-clc
-clear all
+clc; clear all;
 
 syms x y;
 f = @(x) tan(x) - x;
@@ -26,10 +25,14 @@ iter_newton = length(root_newton);
 
 %% Display setting and output setup
 scr = get(groot,'ScreenSize');                              % screen resolution
+phi = (1 + sqrt(5))/2;
+ratio = phi/3;
+offset = [ scr(3)/4 scr(4)/4]; 
 fig1 =  figure('Position',...                               % draw figure
-    [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
+        [offset(1) offset(2) scr(3)*ratio scr(4)*ratio]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title
-    'Color','white');
+        'name','Intersections of y=tan(x) and y=x',...
+        'Color','white');
 fontName='Helvetica';
 set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
@@ -81,6 +84,7 @@ legend1 = legend({'y = tan(x)','y = x', 'intercepts'},...
      'Box','off');
 hold on
 
+% Numeric values on extra X axis
 ax2 = axes('Position',get(ax1,'Position'),...
            'XAxisLocation','top',...
            'YAxisLocation','right',...
@@ -93,3 +97,11 @@ ax1.YLim = [0 10+offsetx];
 ax2.XLim=ax1.XLim;
 ax2.YLim=ax1.YLim;
 set(ax2,'YTick','')
+
+% Adjust figure
+pos = get(ax1, 'Position');
+pos(1) = 0.05;
+pos(3) = pos(3)*1.1;
+set(ax1, 'Position', pos)
+set(ax2, 'Position', pos)
+hold off
