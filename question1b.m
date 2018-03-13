@@ -22,7 +22,6 @@ for i=1:length(x_0)
 end
 root_newton= sort(unique(root_newton));
 
-
 % iterations
 iter_newton = length(root_newton);
 
@@ -37,16 +36,8 @@ set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
 set(groot,'FixedWidthFontName', 'ElroNet Monospace')      
 
-
 % Draw plot to examine the function tan(x)-x=0
 values = [0:0.01:10];
-
-% p1 = plot(values,f(values),...
-%         'Color',[0.9 0.18 0.18 .6],...                 
-%         'LineStyle','-',...
-%         'LineWidth',1);
-% hold on
-
 a=tan(values);
 p2 = plot(values,a,...
         'Color',[0.18 0.9 0.18 .6],...                 

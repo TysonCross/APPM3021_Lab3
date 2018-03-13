@@ -49,31 +49,32 @@ disp(['Regula Falsi root converged in ', num2str(t_falsi*1000), ' milli-seconds'
 disp(['Newton fixed-point root converged in ', num2str(t_newton*1000), ' milli-seconds (including calculation of f'')'])
 
 %% Plotting
-% Quick function plot
-scr = get(groot,'ScreenSize');                              % screen resolution
-figez =  figure('Position',...                               % draw figure
-    [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
-set(figez,'numbertitle','off',...
-    'Color','white');
-set(figez, 'MenuBar', 'none');                               % Make figure clean
-set(figez, 'ToolBar', 'none');
-fontName='Helvetica';
-set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
-set(0,'defaultTextFontName', fontName);
-set(groot,'FixedWidthFontName', 'ElroNet Monospace')   
-ezplot(f,[-8,6,-10,50],figez)
-r_ez = refline(0,0);
-r_ez.Color = [0.18 0.18 0.18];
-set(gca,'Box','off')
-title(char(sym(f)),...
-    'FontSize',14,...
-    'FontName',fontName);
-ylabel('f(x) \rightarrow',...
-    'FontName',fontName,...
-    'FontSize',14);%,...
-xlabel('x \rightarrow',...
-    'FontName',fontName,...
-    'FontSize',14);
+% % Quick function plot
+% scr = get(groot,'ScreenSize');                              % screen resolution
+% figez =  figure('Position',...                               % draw figure
+%     [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
+% set(figez,'numbertitle','off',...
+%     'name','Graph of function',...
+%     'Color','white');
+% set(figez, 'MenuBar', 'none');                               % Make figure clean
+% set(figez, 'ToolBar', 'none');
+% fontName='Helvetica';
+% set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
+% set(0,'defaultTextFontName', fontName);
+% set(groot,'FixedWidthFontName', 'ElroNet Monospace')   
+% ezplot(f,[-8,6,-10,50],figez)
+% r_ez = refline(0,0);
+% r_ez.Color = [0.18 0.18 0.18];
+% set(gca,'Box','off')
+% title(char(sym(f)),...
+%     'FontSize',14,...
+%     'FontName',fontName);
+% ylabel('f(x) \rightarrow',...
+%     'FontName',fontName,...
+%     'FontSize',14);%,...
+% xlabel('x \rightarrow',...
+%     'FontName',fontName,...
+%     'FontSize',14);
 
 %% Main plot
 %% Display setting and output setup
