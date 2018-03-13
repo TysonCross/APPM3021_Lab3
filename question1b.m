@@ -5,8 +5,7 @@ clear all
 
 syms x y;
 f = @(x) tan(x) - x;
-x_0 = [0, 0,1, 1.5, pi/2, 4.6, 3*pi/2, 4.71, 5*pi/2, 7.6, 7.85]; % guesses based on visual intercepts
-% x_0 = [1:0.001:10];
+x_0 = [1.5, pi/2, 4.6, 3*pi/2, 4.71, 5*pi/2, 7.6, 7.85]; % guesses based on visual intercepts
 tol = 0.0001;
 root_newton = [];
 
