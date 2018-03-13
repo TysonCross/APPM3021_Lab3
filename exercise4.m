@@ -6,8 +6,6 @@ clear global variable
 syms f x;
 f = @(x) 2*x^3 - -x^2 - exp(x) - 2.2;
 
-warning('off');
-
 x_0 = 1;
 I_0 = [1, 2];
 tol = 0.00001;
@@ -54,6 +52,7 @@ disp(['Newton fixed-point root found in ', num2str(t_newton*1000), ' milli-secon
 
 %% Main plot
 % Display setting and output setup
+scr = get(groot,'ScreenSize');                              % screen resolution 
 fig1 =  figure('Position',...                               % draw figure
     [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title

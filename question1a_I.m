@@ -50,6 +50,7 @@ disp(['Newton fixed-point root converged in ', num2str(t_newton*1000), ' milli-s
 
 %% Main plot
 % Display setting and output setup
+scr = get(groot,'ScreenSize');                              % screen resolution 
 fig1 =  figure('Position',...                               % draw figure
     [1 scr(4)*3/5 scr(3)*3.5/5 scr(4)*3/5]);
 set(fig1,'numbertitle','off',...                            % Give figure useful title
